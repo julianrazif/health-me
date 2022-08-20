@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  sql:
+    init:
+      mode: never
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        connection:
+          isolation: 2
+        jdbc:
+          batch_size: 10
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
+app:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/health_me
+    username: root
+hikari:
+  datasource:
+    jdbc-url: jdbc:mariadb://localhost:3306/health_me
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    connection-timeout: 30000
+    idle-timeout: 300000
+    max-lifetime: 900000
+    maximum-pool-size: 20
+    minimum-idle: 4
+    pool-name: dss
+    connection-test-query: select 1
+    auto-commit: false
+server:
+  port: 8081
+logging:
+  level:
+    org.springframework: DEBUG
+    org.hibernate.type: DEBUG
+    org.hibernate.stat: DEBUG
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: DEBUG
+    net.sf.ehcache: DEBUG
